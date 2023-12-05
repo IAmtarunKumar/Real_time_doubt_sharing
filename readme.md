@@ -23,11 +23,11 @@
 - **Request Body**:
   - `email`: User's email address.
   - `password`: User's password.
-  - `name `
-  - `type `
-  - `language`
-  - `subjectExpertise`
-  - `classGrade`
+  - `name ` user name
+  - `type ` user type [student or tutor only]
+  - `language` user language
+  - `subjectExpertise` subject expert [only for tutor]
+  - `classGrade` student grade [only for student]
 - **Response**:
   - `200 OK`
   - `400 Bad Request`
