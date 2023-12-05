@@ -18,7 +18,7 @@ route.get("/doubtHistory", verifyToken, async (req, res) => {
 });
 
 // Get all students doubt
-route.get("/userDoubt", async (req, res) => {
+route.get("/allUserDoubt", async (req, res) => {
   try {
     // const email = req.user.foundUser.email;
     const allDoubts = await Doubt.find();

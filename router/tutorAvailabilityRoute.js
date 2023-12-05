@@ -6,7 +6,7 @@ const verifyToken = require("../config/middleware/verifyToken");
 const route = express.Router();
 
 // Polling Function [its update timeStamp every 3 second by call this route by frontend]
-route.get("/polling", verifyToken, async (req, res) => {
+route.get("/lastPingTimeUpdate", verifyToken, async (req, res) => {
   try {
     const tutorEmail = req.user.foundUser.email;
 
