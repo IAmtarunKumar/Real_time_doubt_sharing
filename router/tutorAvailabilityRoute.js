@@ -17,9 +17,10 @@ route.get("/lastPingTimeUpdate", verifyToken, async (req, res) => {
       { $set: { lastPingTime: currentTime } }
     );
 
-    return res.status(200).send("Last ping time updated");
+    return res.status(200).send("Successful updated last ping time of tutor");
   } catch (error) {
-    console.error("Error updating tutor availability:", error.message);
+    return res.status(500).send(`Internal Server Error ${error.message}`);
+
   }
 });
 

@@ -24,7 +24,7 @@
 
 - **Route**: `POST /user/register`
 
-- **Description**: `Registers a new user i- n the system.`
+- **Description**: `Registers a new user in the system.`
 
 - ****Request Body****:
 - `email`: User's email address.
@@ -42,7 +42,7 @@
 
 ### Login User
 - **Route**: `POST /user/login`
-- **Description**: - Logs in a user, generating an authentication token.
+- **Description**: Logs in a user, generating an authentication token.
 - **Request Body**:
 - `email`: User's email address.
 - `password`: User's password.
@@ -78,7 +78,7 @@
 
 ## Get All Student Doubt History
 
-- **Route**: GET doubt/allUserDoubt
+- **Route**: `GET doubt/allUserDoubt`
 
 - **Description**: Retrieves the doubt history for all users.
 
@@ -91,7 +91,7 @@
 - `500 Internal Server Error`: Server-side issues.
 
 ## Create Doubt
-- **Route**: POST doubt/create
+- **Route**: `POST doubt/create`
 - **Description**: Creates a new doubt entry.
 
 - **Request Body**:
@@ -102,7 +102,7 @@
 - `404 Not Found`: User not found.
 - `500 Internal Server Error`: Server-side issues.
 ## Update Doubt
-- **Route**: PATCH doubt/update/:id
+- **Route**: `PATCH doubt/update/:id`
 * **Description**: Updates an existing doubt entry.
 - **Request Body**:
 - `user`: Request body object containing updated doubt details.
@@ -113,7 +113,7 @@
 - `500 Internal Server Error`: Server-side issues.
 
 ## Delete Doubt
-- **Route**: DELETE doubt/delete- /:id
+- **Route**: `DELETE doubt/delete/:id`
 - **Description**: Deletes a doubt entry.
 - **Request Body**:
 - `user`: req.body object containing user details.
@@ -125,7 +125,7 @@
 
 ### Update Ping Time
 
-- **Route**: Get /tutor/lastPingTimeUpdate
+- **Route**: Get `/tutor/lastPingTimeUpdate`
 
 - **Description**: Updates the last ping time for a tutor's availability.
 
@@ -133,6 +133,6 @@
 - `user`: User data stored in the token.
 
 **Response**:
-- `200 OK`: Successful upda- te.
+- `200 OK`: Successful updated last ping time of tutor.
 - `404 Not Found`: Tutor not found.
 - `500 Internal Server Error`: Server-side issues.
