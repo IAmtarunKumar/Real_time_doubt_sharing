@@ -26,7 +26,7 @@
 
 - **Description**: `Registers a new user in the system.`
 
-- ****Request Body****:
+- **Request Body**:
 - `email`: User's email address.
 - `password`: User's password.
 - `name`: User's name.
@@ -36,7 +36,7 @@
 - `classGrade`: Student grade (only for student).
 
 - **Response**:
--`200 OK`: Successful registration.
+- `200 OK`: Successful registration.
 - `400 Bad Request`: Invalid or missing parameters.
 - `500 Internal Server Error`: Server-side issues.
 
@@ -47,7 +47,7 @@
 - `email`: User's email address.
 - `password`: User's password.
 - **Response**:
--`200 OK`: Successful login and token.
+- `200 OK`: Successful login and token.
 - `400 Bad Request`: Invalid credentials.
 - `404 Not Found`: User not found.
 - `500 Internal Server Error`: Server-side issues.
