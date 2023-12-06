@@ -1,129 +1,138 @@
-# Real-time doubt sharing Assignment
+# Real-time Doubt Sharing System Documentation
 
-## This document outlines the available routes, their functionalities, expected inputs, and responses for the application.
+## Introduction
+
+### This document serves as a comprehensive guide to the functionality and implementation details of the real-time doubt sharing system. It covers various routes for user interactions, doubt management, and system maintenance.
 
 # Cron Job
 
 ## Count Available Tutors
 
-- **Description**: Runs a cron job every second to count the available tutors based on their last ping time within a 3-second window from the current time.
+- **Description**: Periodically counts available tutors based on their recent activity.
 - **Functionality**:
-  - Queries the database to count tutors with lastPingTime within the specified window.
-  - Logs the count of available tutors and the current time to the console.
+-Queries the database to count tutors active within the last 3 seconds.
+-Logs the count and current time to the console.
 - **Implementation**:
-  - The cron job is initialized upon server startup using `cron.schedule('* * * * * *', countAvailableTutors)`.
-  - `countAvailableTutors` function performs the database query and logging.
+-A cron job is scheduled on server startup using `cron.schedule('* * * * * *', countAvailableTutors)`.
+
+-The `countAvailableTutors`` function handles the database query and logging.
+
 
 ## User Routes
 
 ### Register User
 
 - **Route**: `POST /user/register`
-- **Description**: Registers a new user in the system.
-- **Request Body**:
-  - `email`: User's email address.
-  - `password`: User's password.
-  - `name ` user name
-  - `type ` user type [student or tutor only]
-  - `language` user language
-  - `subjectExpertise` subject expert [only for tutor]
-  - `classGrade` student grade [only for student]
+
+- **Description**: `Registers a new user i- n the system.`
+
+- ****Request Body****:
+- `email`: User's email address.
+- `password`: User's password.
+- `name`: User's name.
+- `type`: User type (student or tutor).
+- `language`: User's preferred language.
+- `subjectExpertise`: Subject expertise (only for tutor).
+- `classGrade`: Student grade (only for student).
+
 - **Response**:
-  - `200 OK`
-  - `400 Bad Request`
-  - `500 Internal Server Error`
+-`200 OK`: Successful registration.
+- `400 Bad Request`: Invalid or missing parameters.
+- `500 Internal Server Error`: Server-side issues.
 
 ### Login User
-
 - **Route**: `POST /user/login`
-- **Description**: Logs in a user and generates an authentication token.
+- **Description**: - Logs in a user, generating an authentication token.
 - **Request Body**:
-  - `email`: User's email address.
-  - `password`: User's password.
+- `email`: User's email address.
+- `password`: User's password.
 - **Response**:
-  - `200 OK`
-  - `400 Bad Request`
-  - `404 Not Found`
-  - `500 Internal Server Error`
+-`200 OK`: Successful login and token.
+- `400 Bad Request`: Invalid credentials.
+- `404 Not Found`: User not found.
+- `500 Internal Server Error`: Server-side issues.
 
 ### Logout
-
 - **Route**: `POST /user/logout`
-- **Description**: User logout and token blacklisted
+- **Description**:-  Logs out a user, blacklisting the token.
 - **Request Body**:
-  - `token`: User's token.
+- `token`: User's token.
+
 - **Response**:
-  - `200 OK`
-  - `500 Internal Server Error`
+- `200 OK`: Successful logout.
+- `500 Internal Server Error`: Server-side issues.
 
-## Dought Routes
-
-### Fetch Dought History
-
+## Doubt Route
+### Fetch Doubt History
 - **Route**: `GET doubt/doubtHistory`
-- **Description**: Retrieves the dought history for a specific user by time stamp.
+
+- **Description**: Retrieves the doubt history for a specific user by timestamp.
+
 - **Request Body**:
-  - `user`: token store user data.
+- `user`: Token storing user data.
+
 - **Response**:
-  - `200 OK`
-  - `404 Not Found`
-  - `500 Internal Server Error`
+- `200 OK`: Successful retrieval.
+- `404 Not Found`: User or doubt history not found.
+- `500 Internal Server Error`: Server-side issues.
 
-### Get all student doubt History
+## Get All Student Doubt History
 
-- **Route**: `GET doubt/allUserDoubt`
-- **Description**: Retrieves all user doubt history
+- **Route**: GET doubt/allUserDoubt
+
+- **Description**: Retrieves the doubt history for all users.
+
 - **Request Body**:
-  - `user`: token store user data.
+- `user`: Token storing user data.
+
 - **Response**:
-  - `200 OK`
-  - `404 Not Found`
-  - `500 Internal Server Error`
+- `200 OK`: Successful retrieval.- 
+- `404 Not Found`: Doubt history not found.
+- `500 Internal Server Error`: Server-side issues.
 
-### Create doubt
+## Create Doubt
+- **Route**: POST doubt/create
+- **Description**: Creates a new doubt entry.
 
-- **Route**: `GET doubt/create`
-- **Description**: Create doubt
 - **Request Body**:
-  - `user`: req.body object
+- `user`: Request body object containing doubt details.
+
 - **Response**:
-
-  - `200 OK`
-  - `404 Not Found`
-  - `500 Internal Server Error`
-
-  ### Update doubt
-
-- **Route**: `GET doubt/update/:id`
-- **Description**: update doubt
+- `200 OK`: Successful doubt creation.
+- `404 Not Found`: User not found.
+- `500 Internal Server Error`: Server-side issues.
+## Update Doubt
+- **Route**: PATCH doubt/update/:id
+* **Description**: Updates an existing doubt entry.
 - **Request Body**:
-  - `user`: req.body object
+- `user`: Request body object containing updated doubt details.
+
 - **Response**:
+- `200 OK`: Successful updated.
+- `404 Not Found`: Doubt not found.
+- `500 Internal Server Error`: Server-side issues.
 
-  - `200 OK`
-  - `404 Not Found`
-  - `500 Internal Server Error`
-
-  ### Delete doubt
-
-- **Route**: `GET doubt/delete/:id`
-- **Description**: Delete doubt
+## Delete Doubt
+- **Route**: DELETE doubt/delete- /:id
+- **Description**: Deletes a doubt entry.
 - **Request Body**:
-  - `user`: req.body object
+- `user`: req.body object containing user details.
 - **Response**:
-  - `200 OK`
-  - `404 Not Found`
-  - `500 Internal Server Error`
-
-## Tutor Routes
+- `200 OK`: Successful deleted .
+- `404 Not Found`: Doubt not found.
+- `500 Internal Server Error`: Server-side issues.
+## Tutor Route
 
 ### Update Ping Time
 
-- **Route**: `GET /tutor/lastPingTimeUpdate`
+- **Route**: Get /tutor/lastPingTimeUpdate
+
 - **Description**: Updates the last ping time for a tutor's availability.
-- **Request Body**:
-  - `user`: user data store in token
-- **Response**:
-  - `200 OK`
-  - `404 Not Found`
-  - `500 Internal Server Error`
+
+**Request Body**:
+- `user`: User data stored in the token.
+
+**Response**:
+- `200 OK`: Successful upda- te.
+- `404 Not Found`: Tutor not found.
+- `500 Internal Server Error`: Server-side issues.

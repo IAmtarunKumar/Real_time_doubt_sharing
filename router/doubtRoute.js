@@ -4,7 +4,7 @@ const verifyToken = require("../config/middleware/verifyToken");
 
 const route = express.Router();
 
-// Show all doubt history of login user
+// Show all doubt history sorted by timestamp api
 route.get("/doubtHistory", verifyToken, async (req, res) => {
   try {
     console.log("email", req.user.foundUser.email);
@@ -17,7 +17,7 @@ route.get("/doubtHistory", verifyToken, async (req, res) => {
   }
 });
 
-// Get all students doubt
+// Get all students doubt api
 route.get("/allUserDoubt", async (req, res) => {
   try {
     // const email = req.user.foundUser.email;
@@ -31,7 +31,7 @@ route.get("/allUserDoubt", async (req, res) => {
   }
 });
 
-// Create a Doubt
+// Create a Doubt api
 route.post("/create", verifyToken, async (req, res) => {
   const {
     studentName,
@@ -59,13 +59,13 @@ route.post("/create", verifyToken, async (req, res) => {
       tutorEmail,
     });
     await newDoubt.save();
-    res.status(201).json("Doubt posted successfully");
+    res.status(201).json("Successful doubt creation");
   } catch (error) {
     res.status(500).send(`Internal Server Error: ${error.message}`);
   }
 });
 
-// Update Doubt
+// Update Doubt by id api
 route.patch("/update/:id", async (req, res) => {
   const payload = req.body;
   const id = req.params.id;
@@ -77,13 +77,13 @@ route.patch("/update/:id", async (req, res) => {
     if (!updatedDoubt) {
       return res.status(404).send("Doubt not found");
     }
-    return res.status(200).send("Doubt updated successfully");
+    return res.status(200).send("Successful updated");
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error.message}`);
   }
 });
 
-// Delete doubt
+// Delete doubt by id api
 route.delete("/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -91,7 +91,7 @@ route.delete("/delete/:id", async (req, res) => {
     if (!deletedDoubt) {
       return res.status(404).send("Doubt not found");
     }
-    return res.status(200).send("Doubt deleted successfully");
+    return res.status(200).send("Successful deleted");
   } catch (error) {
     console.error("Error deleting a doubt:", error.message);
     return res.status(500).send(`Internal Server Error: ${error.message}`);

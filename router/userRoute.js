@@ -9,6 +9,7 @@ const verifyToken = require("../config/middleware/verifyToken");
 
 const route = express.Router();
 
+// Show login user data
 route.get("/", verifyToken, async (req, res) => {
   try {
     const email = req.user.foundUser.email;
@@ -19,6 +20,8 @@ route.get("/", verifyToken, async (req, res) => {
     return res.status(500).send(`Internal server error ${error.message}`);
   }
 });
+
+// Show all user data
 route.get("/allUsers", verifyToken, async (req, res) => {
   try {
     const allUsers = await User.find();
@@ -28,7 +31,7 @@ route.get("/allUsers", verifyToken, async (req, res) => {
   }
 });
 
-// Register
+// User register api
 route.post("/register", async (req, res) => {
   try {
     const {
@@ -69,14 +72,14 @@ route.post("/register", async (req, res) => {
     });
     await user.save();
 
-    return res.status(200).send("User register successfully");
+    return res.status(200).send("Successful registration");
   } catch (error) {
     console.error(error);
     return res.status(500).send(`Internal Server Error ${error.message}`);
   }
 });
 
-// Login
+// User login api
 route.post("/login", verifyToken, async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -93,7 +96,7 @@ route.post("/login", verifyToken, async (req, res) => {
         expiresIn: "3600000000",
       });
 
-      return res.status(200).send({ msg: "Login successful", token });
+      return res.status(200).send( "Successful login", token );
     } else {
       return res.status(401).send({ msg: "Invalid email or password" });
     }
@@ -103,7 +106,7 @@ route.post("/login", verifyToken, async (req, res) => {
   }
 });
 
-// Logout
+// User logout api
 route.post("/logout", async (req, res) => {
   try {
     const token = req.headers.authorization;
@@ -111,7 +114,7 @@ route.post("/logout", async (req, res) => {
     const blacklistedToken = new BlacklistModel({ token });
     await blacklistedToken.save();
 
-    return res.status(200).send({ msg: "Logout successful" });
+    return res.status(200).send("Successful logout");
   } catch (error) {
     console.error(error);
     return res.status(500).send(`Internal Server Error ${error.message}`);

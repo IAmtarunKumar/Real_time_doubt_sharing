@@ -5,7 +5,8 @@ const verifyToken = require("../config/middleware/verifyToken");
 
 const route = express.Router();
 
-// Polling Function [its update timeStamp every 3 second by call this route by frontend]
+// Polling Function [its update timeStamp every 3 second by call this api by frontend]
+
 route.get("/lastPingTimeUpdate", verifyToken, async (req, res) => {
   try {
     const tutorEmail = req.user.foundUser.email;
@@ -22,7 +23,7 @@ route.get("/lastPingTimeUpdate", verifyToken, async (req, res) => {
   }
 });
 
-// CRON Job to Count Real-time
+// CRON job to count Real-time online tutor
 cron.schedule("* * * * * *", async () => {
   try {
     // const currentTime = Date.now();
